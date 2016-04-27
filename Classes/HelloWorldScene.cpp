@@ -84,9 +84,31 @@ bool HelloWorld::init()
         return false;
     }
     
+    /*
     auto rootNode = CSLoader::createNode("MainScene.csb");
 
     addChild(rootNode);
+     */
+    
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    
+    // add "HelloWorld" splash screen"
+    auto sprite = Sprite::create("HelloWorld.png");
+    
+    // position the sprite on the center of the screen
+    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+    
+    // add the sprite as a child to this layer
+    this->addChild(sprite, 0);
+    
+    auto label = Label::createWithTTF("Hello World", "fonts/Game of Three.ttf", 24);
+    
+    // position the label on the center of the screen
+    label->setPosition(Vec2(origin.x + visibleSize.width/2, origin.y + visibleSize.height - label->getContentSize().height));
+    
+    // add the label as a child to this layer
+    this->addChild(label, 1);
 
     return true;
 }
