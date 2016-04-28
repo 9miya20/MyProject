@@ -8,6 +8,7 @@
 
 USING_NS_CC;
 #include "MainScene.hpp"
+#include "Constants.h"
 
 Scene* MainScene::createScene()
 {
@@ -31,9 +32,21 @@ bool MainScene::init()
         return false;
     }
     
-    auto sprite = Sprite::create("images/sample.png");
-    
-    this->addChild(sprite, 0);
+    /*
+     背景
+     */
+    //背景生成
+    Sprite* backGround = Sprite::create("images/sample.png");
+    //スプライトのサイズ取得
+    Size backGroundContentSize = backGround->getContentSize();
+    //設定解像度のの縦比率を取得
+    float backGroundMagnification = DESIGN_RESOLUTION_SIZE.height / backGroundContentSize.height;
+    //画面サイズに合わせる
+    backGround->setContentSize(Size(backGroundContentSize.width * backGroundMagnification, backGroundContentSize.height * backGroundMagnification));
+    //中心に配置
+    backGround->setPosition(Vec2(DESIGN_RESOLUTION_SIZE.width / 2, DESIGN_RESOLUTION_SIZE.height / 2));
+    //画面に表示
+    this->addChild(backGround, 0);
     
     return true;
 }

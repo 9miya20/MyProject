@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "MainScene.hpp"
+#include "Constants.h"
 
 USING_NS_CC;
 
@@ -28,13 +29,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("MyProject", Rect(0, 0, 960, 640));
+        glview = GLViewImpl::createWithRect("MyProject", Rect(0, 0, DESIGN_RESOLUTION_SIZE.width, DESIGN_RESOLUTION_SIZE.height));
         director->setOpenGLView(glview);
     }
 
     //director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
     //端末を横に変更
-    glview->setDesignResolutionSize(960, 640, ResolutionPolicy::FIXED_HEIGHT);
+    glview->setDesignResolutionSize(DESIGN_RESOLUTION_SIZE.width, DESIGN_RESOLUTION_SIZE.height, ResolutionPolicy::FIXED_HEIGHT);
 
     // turn on display FPS
     director->setDisplayStats(true);
