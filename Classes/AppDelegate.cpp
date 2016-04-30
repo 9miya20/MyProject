@@ -2,6 +2,7 @@
 #include "HelloWorldScene.h"
 #include "MainScene.hpp"
 #include "Constants.h"
+#include "ScreenManager.hpp"
 
 USING_NS_CC;
 
@@ -32,11 +33,20 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLViewImpl::createWithRect("MyProject", Rect(0, 0, DESIGN_RESOLUTION_SIZE.width, DESIGN_RESOLUTION_SIZE.height));
         director->setOpenGLView(glview);
     }
-
+    
+    // 横(Landscape)の場合
+    const ResolutionPolicy policy = ScreenManager::getInstance()->judgeScreenScale() ? ResolutionPolicy::FIXED_HEIGHT : ResolutionPolicy::FIXED_WIDTH;
+    /*
+    // 縦(Portrait)の場合
+    const ResolutionPolicy policy = scaleW > scaleH ? ResolutionPolicy::FIXED_HEIGHT : ResolutionPolicy::FIXED_WIDTH;
+     */
+    
     //director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
     //端末を横に変更
-    glview->setDesignResolutionSize(DESIGN_RESOLUTION_SIZE.width, DESIGN_RESOLUTION_SIZE.height, ResolutionPolicy::FIXED_HEIGHT);
+    glview->setDesignResolutionSize(DESIGN_RESOLUTION_SIZE.width, DESIGN_RESOLUTION_SIZE.height, policy);
 
+    //
+    
     // turn on display FPS
     director->setDisplayStats(true);
 
